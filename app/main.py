@@ -1,15 +1,17 @@
 import gi
-import sys
 
-from app.controller.DispositivoController import DispositivoController
-from app.controller.DispositivoPessoaController import DispositivoPessoaController
-from app.controller.PessoaController import PessoaController
-from app.repository.DispositivoPessoaRepository import DispositivoPessoaRepository
-from app.repository.DispositivoRepository import DispositivoRepository
-from app.repository.PessoaRepository import PessoaRepository
+from app.controller.dispositivo.DispositivoController import DispositivoController
+from app.controller.dispositivopessoa.DispositivoPessoaController import DispositivoPessoaController
+from app.controller.pessoa.PessoaController import PessoaController
+from app.interface.abas.AbasWindow import AbasWindow
+from app.interface.providers.gtk.GtkProvider import GtkProvider
+from app.repository.dispositivo.DispositivoRepository import DispositivoRepository
+from app.repository.dispositivopessoa.DispositivoPessoaRepository import DispositivoPessoaRepository
+from app.repository.pessoa.PessoaRepository import PessoaRepository
 from config.config import Config
-gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk
+
+gi.require_version('Gtk', '3.0')
+
 
 def initialize_singletons():
     Config()
@@ -29,17 +31,8 @@ if __name__ == "__main__":
     initialize_repositories()
     initialize_controllers()
 
-    print(len(PessoaController().find_all()))
-    print(len(DispositivoController().find_all()))
-    print(len(DispositivoPessoaController().find_all()))
+    nomes = [pessoa.nome for pessoa in PessoaController().find_all()]
 
-    print(PessoaController().find_by_id(1))
-    print(DispositivoController().find_by_id(1))
-    print(DispositivoPessoaController().find_by_id(1))
-
-    sys.stdout.flush()
-
-    window = Gtk.Window(title="Teste GTK")
-    window.connect("destroy", Gtk.main_quit)
+    window = AbasWindow(nomes)
     window.show_all()
-    Gtk.main()
+    GtkProvider.main()

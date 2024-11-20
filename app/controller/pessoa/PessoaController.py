@@ -1,6 +1,6 @@
 from app.controller.BaseController import BaseController
 from app.entities.pessoa.Pessoa import Pessoa
-from app.repository.PessoaRepository import PessoaRepository
+from app.repository.pessoa.PessoaRepository import PessoaRepository
 
 class PessoaController(BaseController[Pessoa]):
     _instance = None

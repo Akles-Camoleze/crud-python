@@ -1,6 +1,6 @@
 from app.controller.BaseController import BaseController
 from app.entities.dispositivo.Dispositivo import Dispositivo
-from app.repository.DispositivoRepository import DispositivoRepository
+from app.repository.dispositivo.DispositivoRepository import DispositivoRepository
 
 
 class DispositivoController(BaseController[Dispositivo]):
