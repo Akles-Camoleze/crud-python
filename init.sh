@@ -21,7 +21,7 @@ elif [ "$1" = "database" ]; then
 
 elif [ "$1" = "build" ]; then
     docker compose down
-    docker compose up --build
+    docker compose up -d --build
 
 else
     # Mensagem de erro caso o parâmetro seja inválido

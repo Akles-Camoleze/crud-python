@@ -24,6 +24,7 @@ RUN pip3 install --no-cache-dir \
     PyGObject \
     psycopg2 \
     pycairo \
+    sqlalchemy \
     python-dotenv
 
 # Definir o diretório de trabalho
