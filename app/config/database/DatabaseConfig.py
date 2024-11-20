@@ -1,5 +1,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy.ext.declarative import declarative_base
 
 class DatabaseConfig:
     def __init__(self, config):
@@ -11,9 +12,14 @@ class DatabaseConfig:
         self.db_url = config.get('database', 'DB_URL')
         self._engine = create_engine(self.db_url, pool_pre_ping=True)
         self._session_factory = sessionmaker(bind=self._engine)
+        self._base = declarative_base()
 
     def __repr__(self):
         return f"DatabaseConfig(db_name={self.db_name}, db_user={self.db_user}, db_password={self.db_password}, db_host={self.db_host}, db_port={self.db_port})"
 
     def session_factory(self):
         return self._session_factory()
+
+    @property
+    def base(self):
+        return self._base

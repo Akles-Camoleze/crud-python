@@ -1,4 +1,4 @@
-from typing import TypeVar, Generic
+from typing import TypeVar, Generic, List
 
 from app.db.db import Database
 
@@ -9,10 +9,10 @@ class BaseRepository(Generic[T]):
         self._entity = entity
         self._db = Database()
 
-    def find_all(self):
+    def find_all(self) -> List[T]:
         session = self._db.get_session()
         return session.query(self._entity).all()
 
-    def find_by_id(self, id):
+    def find_by_id(self, id) -> T:
         session = self._db.get_session()
         return session.query(self._entity).filter(self._entity.id == id).first()
