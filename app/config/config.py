@@ -1,7 +1,9 @@
 import configparser
 import os
-from .database.DatabaseConfig import DatabaseConfig
-from .app.AppConfig import AppConfig
+
+from app.config.app.AppConfig import AppConfig
+from app.config.database.DatabaseConfig import DatabaseConfig
+
 
 class Config:
     _instance = None

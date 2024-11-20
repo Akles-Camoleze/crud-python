@@ -16,4 +16,4 @@ class DatabaseConfig:
         return f"DatabaseConfig(db_name={self.db_name}, db_user={self.db_user}, db_password={self.db_password}, db_host={self.db_host}, db_port={self.db_port})"
 
     def session_factory(self):
-        return self._session_factory
+        return self._session_factory()

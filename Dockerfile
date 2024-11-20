@@ -33,5 +33,7 @@ WORKDIR /app
 # Copiar os scripts da aplicação para o contêiner
 COPY ./app /app
 
+ENV PYTHONPATH="/."
+
 # Definir o comando de inicialização
 CMD ["python3", "main.py"]
