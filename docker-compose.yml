@@ -1,0 +1,37 @@
+services:
+  # Banco de Dados
+  database:
+    container_name: crud-db
+    image: postgres:alpine
+    ports:
+      - ${DB_PORT}:${DB_PORT}
+    env_file:
+      - ./.env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/scripts:/docker-entrypoint-initdb.d
+    networks:
+      - crud_network
+
+  # Aplicação
+  app:
+    container_name: crud-app
+    build: .
+    ports:
+      - ${APP_PORT}:${APP_PORT}
+    env_file:
+      - ./.env
+    networks:
+      - crud_network
+    volumes:
+      - ./app:/app
+      - /app/__pycache__
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  crud_network:
+    driver: bridge
