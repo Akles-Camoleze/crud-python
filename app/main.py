@@ -29,6 +29,7 @@ if __name__ == "__main__":
     initialize_singletons()
     initialize_repositories()
     initialize_controllers()
+    initialize_services()
 
     window = MainPage()
     window.show_all()
