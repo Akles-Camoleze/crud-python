@@ -20,3 +20,6 @@ class GtkProvider:
     CssProvider = Gtk.CssProvider
     StyleContext = Gtk.StyleContext
     STYLE_PROVIDER_PRIORITY_APPLICATION = Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+    Button = Gtk.Button
+    Grid = Gtk.Grid
+    Align = Gtk.Align
