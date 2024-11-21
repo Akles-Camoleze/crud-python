@@ -9,6 +9,19 @@ psql -v ON_ERROR_STOP=1 --username "$DB_USER" --dbname "$DB_NAME" <<-EOSQL
   -- Criação do schema
   CREATE SCHEMA IF NOT EXISTS "$DB_SCHEMA";
 
+  -- Criação das sequences
+  CREATE SEQUENCE IF NOT EXISTS "$DB_SCHEMA".seq_pessoa
+    NO MINVALUE
+    NO MAXVALUE;
+
+  CREATE SEQUENCE IF NOT EXISTS "$DB_SCHEMA".seq_dispositivo
+    NO MINVALUE
+    NO MAXVALUE;
+
+  CREATE SEQUENCE IF NOT EXISTS "$DB_SCHEMA".seq_disp_pessoa
+    NO MINVALUE
+    NO MAXVALUE;
+
   -- Criação da tabela tb_pessoa
   CREATE TABLE IF NOT EXISTS "$DB_SCHEMA".tb_pessoa (
     pe_id INTEGER NOT NULL PRIMARY KEY,

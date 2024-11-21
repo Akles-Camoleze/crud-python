@@ -23,3 +23,4 @@ class GtkProvider:
     Button = Gtk.Button
     Grid = Gtk.Grid
     Align = Gtk.Align
+    Entry = Gtk.Entry

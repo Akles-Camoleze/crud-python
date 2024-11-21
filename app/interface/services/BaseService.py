@@ -16,3 +16,6 @@ class BaseService(Generic[T]):
 
     def delete_by_id(self, id) -> int:
         return self._controller.delete_by_id(id)
+
+    def save(self, entity: T) -> T:
+        return self._controller.save(entity)
