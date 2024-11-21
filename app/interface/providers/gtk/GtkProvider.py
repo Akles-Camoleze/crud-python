@@ -25,3 +25,6 @@ class GtkProvider:
     Align = Gtk.Align
     Entry = Gtk.Entry
     HBox = Gtk.HBox
+    Image = Gtk.Image
+    IconSize = Gtk.IconSize
+    ReliefStyle = Gtk.ReliefStyle
