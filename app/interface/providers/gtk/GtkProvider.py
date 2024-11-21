@@ -24,3 +24,4 @@ class GtkProvider:
     Grid = Gtk.Grid
     Align = Gtk.Align
     Entry = Gtk.Entry
+    HBox = Gtk.HBox
