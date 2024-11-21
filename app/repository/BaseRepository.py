@@ -41,17 +41,11 @@ class BaseRepository(Generic[T]):
         session = self._db.get_session()
         try:
             if entity.id:
-                existing_entity = self.find_by_id(entity.id)
-                if existing_entity:
-                    for key, value in entity.__dict__.items():
-                        if key != '_sa_instance_state':
-                            setattr(existing_entity, key, value)
-                    session.commit()
-                else:
-                    raise ValueError(f"Entity with id {entity.id} not found.")
+                session.merge(entity)
             else:
                 session.add(entity)
-                session.commit()
+
+            session.commit()
             return entity
         except SQLAlchemyError as e:
             session.rollback()

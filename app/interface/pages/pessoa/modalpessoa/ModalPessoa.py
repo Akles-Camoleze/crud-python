@@ -5,7 +5,7 @@ from app.interface.services.pessoa.PessoaService import PessoaService
 
 class ModalPessoa(GtkProvider.Window):
     def __init__(self, parent, callback, pessoa_id=None):
-        super().__init__(title="Adicionar Pessoa", modal=True)
+        super().__init__(title=f"{'Editar' if pessoa_id else 'Adicionar'} Pessoa", modal=True)
 
         self.parent = parent
         self.callback = callback
