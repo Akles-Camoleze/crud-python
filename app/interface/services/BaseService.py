@@ -13,3 +13,6 @@ class BaseService(Generic[T]):
 
     def find_by_id(self, id) -> T:
         return self._controller.find_by_id(id)
+
+    def delete_by_id(self, id) -> int:
+        return self._controller.delete_by_id(id)

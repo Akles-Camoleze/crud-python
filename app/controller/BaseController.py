@@ -13,3 +13,6 @@ class BaseController(Generic[T]):
 
     def find_by_id(self, id) -> T:
         return self._repository.find_by_id(id)
+
+    def delete_by_id(self, id) -> int:
+        return self._repository.delete_by_id(id)
