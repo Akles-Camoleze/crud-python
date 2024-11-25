@@ -4,6 +4,7 @@ from app.interface.providers.gdk.GdkPixbufProvider import GdkPixbufProvider
 from app.interface.providers.gtk.GtkProvider import GtkProvider
 from app.interface.services.dispositivo.DispositivoService import DispositivoService
 from app.interface.services.dispositivopessoa.DispositivoPessoaService import DispositivoPessoaService
+from app.interface.utils.WidgetUtils import WidgetUtils
 
 
 class ModalDispositivos(RoundedWindow):
@@ -84,11 +85,7 @@ class ModalDispositivos(RoundedWindow):
         label = GtkProvider.Label(label=dispositivo.nome)
         row_box.pack_start(label, True, True, 0)
 
-        delete_button = GtkProvider.Button()
-        delete_button.set_relief(GtkProvider.ReliefStyle.NONE)
-        delete_icon = GtkProvider.Image.new_from_pixbuf(self.load_and_resize_svg("resources/icons/trash.svg"))
-        delete_button.set_image(delete_icon)
-        delete_button.connect("clicked", self.on_delete_clicked, dispositivo.id)
+        delete_button = WidgetUtils.create_icon_button(self.on_delete_clicked, "trash", dispositivo.id)
 
         row_box.pack_start(delete_button, False, False, 0)
 
@@ -119,9 +116,6 @@ class ModalDispositivos(RoundedWindow):
         self.load_all_dispositivos()
         self.callback()
         self.hide()
-
-    def load_and_resize_svg(self, icon_path, width=26, height=26):
-        return GdkPixbufProvider.Pixbuf.new_from_file_at_size(icon_path, width, height)
 
     def on_delete_clicked(self):
         pass
