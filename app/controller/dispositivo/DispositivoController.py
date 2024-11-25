@@ -18,6 +18,3 @@ class DispositivoController(BaseController[Dispositivo]):
             self._repository = DispositivoRepository()
             super().__init__(self._repository)
             self._initialized = True
-
-    def find_by_id_pessoa(self, pessoa_id) -> List[Dispositivo]:
-        return self._repository.find_by_id_pessoa(pessoa_id)

@@ -18,11 +18,3 @@ class DispositivoRepository(BaseRepository[Dispositivo]):
         if not hasattr(self, "_initialized"):
             super().__init__(Dispositivo)
             self._initialized = True
-
-    def find_by_id_pessoa(self, pessoa_id) -> List[T]:
-        session = self._db.get_session()
-        try:
-            return session.query(self._entity).join(DispositivoPessoa).join(Pessoa).filter(Pessoa.id == pessoa_id).all()
-        finally:
-            session.close()
-

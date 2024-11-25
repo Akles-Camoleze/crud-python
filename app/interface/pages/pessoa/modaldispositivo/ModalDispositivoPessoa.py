@@ -1,6 +1,5 @@
 from app.entities.dispositivopessoa.DispositivoPessoa import DispositivoPessoa
 from app.interface.components.window.rounded.RoundedWindow import RoundedWindow
-from app.interface.providers.gdk.GdkPixbufProvider import GdkPixbufProvider
 from app.interface.providers.gtk.GtkProvider import GtkProvider
 from app.interface.services.dispositivo.DispositivoService import DispositivoService
 from app.interface.services.dispositivopessoa.DispositivoPessoaService import DispositivoPessoaService
@@ -70,22 +69,22 @@ class ModalDispositivos(RoundedWindow):
             self.dispositivos_combo.set_active(0)
 
     def load_dispositivos(self):
-        dispositivos = DispositivoService().find_by_id_pessoa(self.pessoa_id)
+        dispositivos = DispositivoPessoaService().find_by_id_pessoa(self.pessoa_id)
         self.list_box_dispositivos.foreach(lambda widget: self.list_box_dispositivos.remove(widget))
 
         if dispositivos:
             for dispositivo in dispositivos:
                 self.create_dispositivo_row(dispositivo)
 
-    def create_dispositivo_row(self, dispositivo):
+    def create_dispositivo_row(self, dispositivo_pessoa):
         row = GtkProvider.ListBoxRow()
 
         row_box = GtkProvider.Box(orientation=GtkProvider.Orientation.HORIZONTAL, spacing=10)
 
-        label = GtkProvider.Label(label=dispositivo.nome)
+        label = GtkProvider.Label(label=dispositivo_pessoa.dispositivo.nome)
         row_box.pack_start(label, True, True, 0)
 
-        delete_button = WidgetUtils.create_icon_button(self.on_delete_clicked, "trash", dispositivo.id)
+        delete_button = WidgetUtils.create_icon_button(self.on_delete_clicked, "trash", dispositivo_pessoa.id)
 
         row_box.pack_start(delete_button, False, False, 0)
 
@@ -117,5 +116,9 @@ class ModalDispositivos(RoundedWindow):
         self.callback()
         self.hide()
 
-    def on_delete_clicked(self):
-        pass
+    def on_delete_clicked(self, button, dispositivo_pessoa_id):
+        DispositivoPessoaService().delete_by_id(dispositivo_pessoa_id)
+        self.load_dispositivos()
+        self.load_all_dispositivos()
+        self.callback()
+        self.hide()

@@ -18,6 +18,3 @@ class DispositivoService(BaseService[Dispositivo]):
             self._controller = DispositivoController()
             super().__init__(self._controller)
             self._initialized = True
-
-    def find_by_id_pessoa(self, pessoa_id) -> List[Dispositivo]:
-        return self._controller.find_by_id_pessoa(pessoa_id)
