@@ -1,7 +1,8 @@
 import gi
 
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk
+gi.require_version('Gdk', '3.0')
+from gi.repository import Gtk, Gdk
 
 class GtkProvider:
     Window = Gtk.Window
@@ -28,3 +29,4 @@ class GtkProvider:
     Image = Gtk.Image
     IconSize = Gtk.IconSize
     ReliefStyle = Gtk.ReliefStyle
+    HeaderBar = Gtk.HeaderBar

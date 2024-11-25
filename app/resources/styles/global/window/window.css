@@ -1,0 +1,8 @@
+window {
+    border-radius: 0 0 15px 0;
+}
+
+notebook {
+    border-radius: 15px;
+    padding: 20px;
+}
