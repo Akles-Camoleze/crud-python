@@ -22,6 +22,7 @@ class ListagemPessoaPage(GtkProvider.Box):
         self.pack_start(header_grid, False, False, 0)
 
         self.list_box = GtkProvider.ListBox()
+        self.list_box.set_selection_mode(GtkProvider.SelectionMode.NONE)
         self.pack_start(self.list_box, True, True, 0)
 
         add_button = GtkProvider.Button(label="Adicionar")
