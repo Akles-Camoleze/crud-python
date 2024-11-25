@@ -1,3 +1,4 @@
+from app.interface.pages.pessoa.modaldispositivo.ModalDispositivoPessoa import ModalDispositivos
 from app.interface.pages.pessoa.modalpessoa.ModalPessoa import ModalPessoa
 from app.interface.providers.gdk.GdkPixbufProvider import GdkPixbufProvider
 from app.interface.providers.gtk.GtkProvider import GtkProvider
@@ -34,23 +35,19 @@ class ListagemPessoaPage(GtkProvider.Box):
         grid.set_column_spacing(10)
         grid.set_column_homogeneous(True)
 
-        nome_label = GtkProvider.Label(label=f"{pessoa.nome} {pessoa.sobrenome}")
-        nome_label.set_hexpand(True)
-        nome_label.set_halign(GtkProvider.Align.START)
-        grid.attach(nome_label, 0, 0, 1, 1)
+        self.column_name(grid, pessoa)
 
-        idade_label = GtkProvider.Label(label=str(pessoa.idade))
-        idade_label.set_hexpand(True)
-        idade_label.set_halign(GtkProvider.Align.START)
-        grid.attach(idade_label, 1, 0, 1, 1)
+        self.column_idade(grid, pessoa)
 
-        cpf_label = GtkProvider.Label(label=pessoa.cpf)
-        cpf_label.set_hexpand(True)
-        cpf_label.set_halign(GtkProvider.Align.START)
-        grid.attach(cpf_label, 2, 0, 1, 1)
+        self.column_cpf(grid, pessoa)
 
+        self.column_actions(grid, pessoa)
+
+        row.add(grid)
+        list_box.add(row)
+
+    def column_actions(self, grid, pessoa):
         actions_box = GtkProvider.HBox(spacing=10)
-
         edit_button = GtkProvider.Button()
         edit_button.set_relief(GtkProvider.ReliefStyle.NONE)
         edit_icon = GtkProvider.Image.new_from_pixbuf(self.load_and_resize_svg("resources/icons/edit.svg"))
@@ -65,10 +62,32 @@ class ListagemPessoaPage(GtkProvider.Box):
         delete_button.connect("clicked", self.on_delete_clicked, pessoa.id)
         actions_box.pack_start(delete_button, False, False, 0)
 
+        menu_button = GtkProvider.Button()
+        delete_button.set_relief(GtkProvider.ReliefStyle.NONE)
+        delete_icon = GtkProvider.Image.new_from_pixbuf(self.load_and_resize_svg("resources/icons/menu.svg"))
+        menu_button.set_image(delete_icon)
+        menu_button.connect("clicked", self.on_menu_clicked, pessoa)
+        actions_box.pack_start(menu_button, False, False, 0)
+
         grid.attach(actions_box, 3, 0, 1, 1)
 
-        row.add(grid)
-        list_box.add(row)
+    def column_cpf(self, grid, pessoa):
+        cpf_label = GtkProvider.Label(label=pessoa.cpf)
+        cpf_label.set_hexpand(True)
+        cpf_label.set_halign(GtkProvider.Align.START)
+        grid.attach(cpf_label, 2, 0, 1, 1)
+
+    def column_idade(self, grid, pessoa):
+        idade_label = GtkProvider.Label(label=str(pessoa.idade))
+        idade_label.set_hexpand(True)
+        idade_label.set_halign(GtkProvider.Align.START)
+        grid.attach(idade_label, 1, 0, 1, 1)
+
+    def column_name(self, grid, pessoa):
+        nome_label = GtkProvider.Label(label=f"{pessoa.nome} {pessoa.sobrenome}")
+        nome_label.set_hexpand(True)
+        nome_label.set_halign(GtkProvider.Align.START)
+        grid.attach(nome_label, 0, 0, 1, 1)
 
     def load_and_resize_svg(self, icon_path, width=26, height=26):
         return GdkPixbufProvider.Pixbuf.new_from_file_at_size(icon_path, width, height)
@@ -80,6 +99,10 @@ class ListagemPessoaPage(GtkProvider.Box):
 
     def on_add_clicked(self, button):
         modal = ModalPessoa(self, self.update_list)
+        modal.show_all()
+
+    def on_menu_clicked(self, button, pessoa):
+        modal = ModalDispositivos(self, self.update_list, pessoa)
         modal.show_all()
 
     def on_edit_clicked(self, button, pessoa_id):

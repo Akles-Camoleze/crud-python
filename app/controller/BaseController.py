@@ -6,7 +6,7 @@ T = TypeVar('T')
 
 class BaseController(Generic[T]):
     def __init__(self, repository: BaseRepository[T]):
-        self._repository = repository
+        self._repository: BaseRepository[T] = repository
 
     def find_all(self) -> List[T]:
         return self._repository.find_all()

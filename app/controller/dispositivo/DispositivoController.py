@@ -1,3 +1,5 @@
+from typing import List
+
 from app.controller.BaseController import BaseController
 from app.entities.dispositivo.Dispositivo import Dispositivo
 from app.repository.dispositivo.DispositivoRepository import DispositivoRepository
@@ -13,5 +15,9 @@ class DispositivoController(BaseController[Dispositivo]):
 
     def __init__(self):
         if not hasattr(self, "_initialized"):
-            super().__init__(DispositivoRepository())
+            self._repository = DispositivoRepository()
+            super().__init__(self._repository)
             self._initialized = True
+
+    def find_by_id_pessoa(self, pessoa_id) -> List[Dispositivo]:
+        return self._repository.find_by_id_pessoa(pessoa_id)

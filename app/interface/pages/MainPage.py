@@ -6,7 +6,7 @@ from app.interface.providers.gtk.GtkProvider import GtkProvider
 class MainPage(RoundedWindow):
     def __init__(self):
         # Inicializa a janela base com título e estilos específicos
-        super().__init__(title="Main Page", radius=10, bg_color="#ffffff", shadow=True)
+        super().__init__(title="CRUDzin em Python", radius=10, bg_color="#ffffff", shadow=True)
 
         # Configurações da janela principal
         self.set_default_size(800, 600)

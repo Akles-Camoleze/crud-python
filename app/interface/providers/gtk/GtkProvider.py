@@ -30,3 +30,6 @@ class GtkProvider:
     IconSize = Gtk.IconSize
     ReliefStyle = Gtk.ReliefStyle
     HeaderBar = Gtk.HeaderBar
+    SelectionMode = Gtk.SelectionMode
+    ComboBoxText = Gtk.ComboBoxText
+    ComboBox = Gtk.ComboBox
