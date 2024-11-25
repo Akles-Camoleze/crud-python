@@ -3,6 +3,8 @@ from app.controller.dispositivopessoa.DispositivoPessoaController import Disposi
 from app.controller.pessoa.PessoaController import PessoaController
 from app.interface.pages.MainPage import MainPage
 from app.interface.providers.gtk.GtkProvider import GtkProvider
+from app.interface.services.dispositivo.DispositivoService import DispositivoService
+from app.interface.services.dispositivopessoa.DispositivoPessoaService import DispositivoPessoaService
 from app.interface.services.pessoa.PessoaService import PessoaService
 from app.repository.dispositivo.DispositivoRepository import DispositivoRepository
 from app.repository.dispositivopessoa.DispositivoPessoaRepository import DispositivoPessoaRepository
@@ -24,6 +26,8 @@ def initialize_controllers():
 
 def initialize_services():
     PessoaService()
+    DispositivoService()
+    DispositivoPessoaService()
 
 if __name__ == "__main__":
     initialize_singletons()

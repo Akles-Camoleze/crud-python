@@ -21,10 +21,6 @@ class DispositivoPessoaRepository(BaseRepository[DispositivoPessoa]):
 
     def find_by_id_pessoa(self, pessoa_id) -> List[DispositivoPessoa]:
         session = self._db.get_session()
-        try:
-            return session.query(self._entity).join(Dispositivo).join(Pessoa) \
+        return session.query(self._entity).join(Dispositivo).join(Pessoa) \
                 .options(joinedload(DispositivoPessoa.dispositivo)) \
                 .filter(Pessoa.id == pessoa_id).all()
-        finally:
-            session.close()
-

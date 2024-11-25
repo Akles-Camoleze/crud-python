@@ -12,18 +12,11 @@ class BaseRepository(Generic[T]):
 
     def find_all(self) -> List[T]:
         session = self._db.get_session()
-
-        try:
-            return session.query(self._entity).all()
-        finally:
-            session.close()
+        return session.query(self._entity).all()
 
     def find_by_id(self, id) -> T:
         session = self._db.get_session()
-        try:
-            return session.query(self._entity).filter(self._entity.id == id).first()
-        finally:
-            session.close()
+        return session.query(self._entity).filter(self._entity.id == id).first()
 
     def delete_by_id(self, id: int) -> int:
         session = self._db.get_session()
@@ -34,8 +27,6 @@ class BaseRepository(Generic[T]):
         except Exception as e:
             session.rollback()
             raise e
-        finally:
-            session.close()
 
     def save(self, entity: T) -> T:
         session = self._db.get_session()
@@ -50,5 +41,3 @@ class BaseRepository(Generic[T]):
         except SQLAlchemyError as e:
             session.rollback()
             raise e
-        finally:
-            session.close()

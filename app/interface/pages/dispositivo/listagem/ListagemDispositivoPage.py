@@ -7,7 +7,6 @@ class ListagemDispositivoPage(GtkProvider.Box):
     def __init__(self):
         super().__init__(orientation=GtkProvider.Orientation.VERTICAL, spacing=10)
 
-        # Header com as colunas "Nome" e "Ações"
         header_grid = GtkProvider.Grid()
         header_grid.set_column_spacing(10)
         header_grid.set_column_homogeneous(True)
@@ -17,11 +16,9 @@ class ListagemDispositivoPage(GtkProvider.Box):
 
         self.pack_start(header_grid, False, False, 0)
 
-        # Listbox onde os dispositivos serão listados
         self.list_box = GtkProvider.ListBox()
         self.pack_start(self.list_box, True, True, 0)
 
-        # Botão para adicionar novo dispositivo
         add_button = GtkProvider.Button(label="Adicionar Dispositivo")
         add_button.connect("clicked", self.on_add_clicked)
         self.pack_start(add_button, False, False, 0)
@@ -34,10 +31,8 @@ class ListagemDispositivoPage(GtkProvider.Box):
         grid.set_column_spacing(10)
         grid.set_column_homogeneous(True)
 
-        # Coluna de Nome
         self.column_name(grid, dispositivo)
 
-        # Coluna de Ações
         self.column_actions(grid, dispositivo)
 
         row.add(grid)
